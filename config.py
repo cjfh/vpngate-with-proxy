@@ -170,7 +170,7 @@ def get_input(s, option):
 class Setting:
     def __init__(self, path):
         self.path = path
-        self.parser = configparser.SafeConfigParser()
+        self.parser = configparser.ConfigParser()
 
         self.proxy = OrderedDict([('use_proxy', 'no'), ('address', ''),
                                   ('port', ''),

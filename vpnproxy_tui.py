@@ -56,7 +56,7 @@ class Server:
         self.logPolicy = data[11]
         self.config_data = base64.b64decode(data[-1]).decode()
         self.proto = 'tcp' if '\r\nproto tcp\r\n' in self.config_data else 'udp'
-        port = re.findall('remote .+ \d+', self.config_data)
+        port = re.findall(r'remote .+ \d+', self.config_data)
         if not port:
             self.port = '0'
         else:
@@ -490,7 +490,7 @@ class Connection:
         vpn_file.close()
 
         ovpn = vpn_file.name
-        command = ['openvpn', '--config', ovpn]
+        command = ['openvpn', '--data-ciphers', 'AES-256-GCM:AES-128-GCM:AES-128-CBC:CHACHA20-POLY1305', '--config', ovpn]
         p = Popen(command, stdout=PIPE, stderr=PIPE, bufsize=1, close_fds=ON_POSIX, universal_newlines=True)
         q = Queue()
         t = Thread(target=self.vpn_output, args=(p.stdout, q))
@@ -510,7 +510,7 @@ class Connection:
 
         # make sure openvpn did close its device
         tuntap = Popen(['ip', 'tuntap'], stdout=PIPE, universal_newlines=True).communicate()[0]
-        devices = re.findall('tun\d+', tuntap)
+        devices = re.findall(r'tun\d+', tuntap)
         for dev in devices:
             call(('ip link delete ' + dev).split())
 

@@ -292,7 +292,7 @@ class AddPopUp(urwid.PopUpLauncher):
     signals = ['done']
 
     def __init__(self, target_widget, popup, value, trigger, size):
-        self.__super.__init__(target_widget)
+        super().__init__(target_widget)
         self.popup = popup(key=trigger, value=value)
         self.trigger = trigger
         self.size = size

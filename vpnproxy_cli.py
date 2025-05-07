@@ -291,7 +291,7 @@ def vpn_manager(ovpn):
     """
     global dns, verbose, dropped_time
 
-    command = ['openvpn', '--config', ovpn]
+    command = ['openvpn', '--data-ciphers', 'AES-256-GCM:AES-128-GCM:AES-128-CBC:CHACHA20-POLY1305', '--config', ovpn]
     p = Popen(command, stdout=PIPE, stdin=PIPE, universal_newlines=True)
     try:
         while p.poll() is None:
