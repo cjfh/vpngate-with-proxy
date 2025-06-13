@@ -3,7 +3,7 @@
 __author__ = "duc_tin"
 __copyright__ = "Copyright 2015+, duc_tin"
 __license__ = "GPLv2"
-__version__ = "1.5"
+__version__ = "1.6"
 __maintainer__ = "duc_tin"
 __email__ = "nguyenbaduc.tin@gmail.com"
 
